@@ -1,16 +1,17 @@
-import styled from 'styled-components';
+import './MemoInput.style.css'
 import { useMemoStore } from '../store/MemoList';
 import {useState} from 'react'
 
 const MemoInput =()=>{
-	const { addMemo } = useMemoStore();
+	const { addMemo, memo } = useMemoStore();
 	const [value, setValue] = useState('')
 
 	return(
-		<AddMemoForm onSubmit={e=>{
+		<form className="addmemo-form" onSubmit={e=>{
 			e.preventDefault();
 			addMemo(value);
 			setValue('')
+			console.log('memo:', memo)
 		}}>
 			<div>
 				<input type="text" value={value}
@@ -21,33 +22,9 @@ const MemoInput =()=>{
 				})}/>
 				<button type="submit">저장</button>
 			</div>
-		</AddMemoForm>
+		</form>
 	)
 }
 
 
-
 export default MemoInput;
-
-const AddMemoForm = styled.form`
-	display:flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	margin: 16px;
-	> div {
-		position: relative;
-		width: 400px;
-		height: 200px;
-	}
-	input {
-		width: 100%;
-		height: 100%;
-		text-align: center;
-	}
-	button{
-		position: absolute;
-		bottom:0;
-		right: 0;
-	}
-`;

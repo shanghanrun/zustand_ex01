@@ -1,42 +1,16 @@
 import React from 'react'
-import styled from 'styled-components'
+import './MemoItem.style.css'
 import { useMemoStore } from '../store/MemoList'
 
-const MemoItem = ({content, id}) => {
+const MemoItem = ({item}) => {
 	const {removeMemo} = useMemoStore()
   return (
-	<MemoWrapper>
-		<div>{content}</div>
-		<RemoveButton onClick={()=>removeMemo(id)}>삭제</RemoveButton>
-	</MemoWrapper>
+	<div className="memo-wrapper">
+		<div>{item?.content}</div>
+		<button className='remove-btn' onClick={()=>removeMemo(item?.id)}>삭제</button>
+	</div>
   )
 }
 
 export default MemoItem;
 
-const MemoWrapper = styled.div`
-  position: relative;
-  width: 200px;
-  height: 200px;
-  padding: 16px;
-  border: 1px solid orange;
-  background-color: lightyellow;
-  border-radius: 8px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 16px;
-  z-index: 999;
-`;
-
-const RemoveButton = styled.button`
-  padding: 4px 7px;
-  background-color: transparent;
-  border: 1px solid #ccc;
-  color: #999;
-  position: absolute;
-  top: 4px;
-  right: 4px;
-`;
